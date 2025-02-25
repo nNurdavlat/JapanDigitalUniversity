@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\GroupStudentController;
-use App\Http\Controllers\GroupSubjectController;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\GroupController;
+use App\Http\Controllers\API\GroupStudentController;
+use App\Http\Controllers\API\GroupSubjectController;
+use App\Http\Controllers\API\RoomController;
 use App\Http\Controllers\GroupTeacherController;
-use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SubjectTeacherController;
 use Illuminate\Http\Request;
@@ -23,10 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::get('logout', [AuthController::class,'logout']);
 
-    Route::resource('groups', GroupController::class);
-    Route::resource('group-subjects', GroupSubjectController::class);
-    Route::resource('rooms', RoomController::class);
     Route::resource('subjects', SubjectController::class);
+    Route::resource('groups', GroupController::class);
+    Route::resource('rooms', RoomController::class);
+    Route::resource('group-subjects', GroupSubjectController::class);
     Route::resource('group-students', GroupStudentController::class);
     Route::resource('subject-teachers', SubjectTeacherController::class);
 
