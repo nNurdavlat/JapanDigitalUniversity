@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
 use Illuminate\Http\Request;
 
@@ -39,11 +41,10 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGroupRequest $request)
     {
-        $validator = $request->validate([
-            'name' => 'required|unique:groups',
-        ]);
+        $validator=$request->validated();
+        Group::query()->create($validator);
 
         Group::query()->create($validator);
 
@@ -69,11 +70,9 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Group $group)
+    public function update(UpdateGroupRequest $request, Group $group)
     {
-        $validator = $request->validate([
-            'name' => 'required|unique:groups',
-        ]);
+        $validator = $request->validated();
 
         $group->update($validator);
 
