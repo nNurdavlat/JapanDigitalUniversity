@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSubjectRequest;
+use App\Http\Requests\UpdateScheduleRequest;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -23,7 +26,6 @@ class ScheduleController extends Controller
     public function store(StoreSubjectRequest $request)
     {
         $validated = $request->validated();
-
 
         Schedule::query()->create($validated);
         return response()->json(['message'=>'Schedule created successfully'], 201);

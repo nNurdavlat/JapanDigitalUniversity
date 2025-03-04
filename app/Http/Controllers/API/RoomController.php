@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRoomRequest;
+use App\Http\Requests\UpdateRoomRequest;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -42,13 +44,9 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRoomRequest $request)
     {
-        $validator = $request->validate([
-            'name' => 'required|unique:rooms',
-        ]);
-
-
+        $validator = $request->validated();
         Room::query()->create($validator);
 
         return response()->json(['message' => 'Room successfully created']);
@@ -73,12 +71,9 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(UpdateRoomRequest $request, Room $room)
     {
-        $validator = $request->validate([
-            'name' => ['required', Rule::unique('rooms')->ignore($room->id)],
-        ]);
-
+        $validator = $request->validated();
         $room->update($validator);
 
         return response()->json(['message' => 'Room successfully updated']);
