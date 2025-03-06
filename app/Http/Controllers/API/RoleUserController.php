@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleUserRequest;
 use App\Http\Requests\UpdateRoleUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Role;
 
 class RoleUserController extends Controller
 {
@@ -20,7 +20,7 @@ class RoleUserController extends Controller
         $user->roles()->attach($validator['role_id']);
         return response()->json([
             'success' => true,
-        ]);
+        ],201);
     }
 
 
